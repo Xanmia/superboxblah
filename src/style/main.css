@@ -1,0 +1,263 @@
+
+body {
+
+    overflow: hidden;
+
+    margin:0;
+    padding: 0;
+      -ms-interpolation-mode: nearest-neighbor;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -o-crisp-edges;
+  image-rendering: pixelated;
+    font-family: 'Open Sans', sans-serif;
+
+}
+
+canvas{
+    position: absolute;
+    display: block;
+    width:100vw;
+    height:100vh;
+    max-width:800px;
+    max-height: 600px;
+
+    transition: all .1s;
+    
+
+}
+
+#main{
+      z-index: 2;
+}
+
+#back{
+      z-index: 0;
+background-image: url(data:image/png;base64,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);
+
+  background-size: 800px 600px;
+}
+
+
+#bob {
+  width: 40px;
+  height: 60px;
+  z-index: 1;
+  position: absolute;
+
+  transform-origin: 50% 99%;
+}
+
+.head {
+  top:-3px;
+  position: absolute;
+  background: gray;
+  width: 40px;
+  height: 40px;
+  border-radius: 45%;
+  border: solid 1px black;
+}
+
+.body {
+  position: absolute;
+  top: -18px;
+  left: -22px;
+
+}
+
+.comma {
+  border-color: black;
+  border-style: solid;
+  border-width: 1px 1px 1px 0px;
+  position: absolute;
+  top: 12px;
+  left: -1px;
+  background: silver;
+  width: 21px;
+  height: 15px;
+  border-radius: 1px 1px 100% 0px;
+}
+
+.eye {
+  position: absolute;
+  top: 10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: black;
+  transition: left 0.08s;
+  animation: blink 4s infinite;
+}
+
+#eyeLeft {
+  left: 7px;
+}
+
+#eyeRight {
+  left: 23px;
+}
+
+.brow {
+  position: absolute;
+  top: 0px;
+  width: 15px;
+  height: 3px;
+  border: solid 1px black;
+  background-color: white;
+  box-shadow: 0px 3px 2px #000
+}
+
+#browLeft {
+  left: 0px;
+  animation: Rexpress 6s infinite reverse;
+}
+
+#browRight {
+  left: 23px;
+  animation: Rexpress 3s infinite;
+}
+
+
+.success {
+  animation: success 4s 1 linear
+}
+
+.bounce {
+  animation: bounce .3s 1 linear
+}
+
+.grab {
+  animation: grab .5s 1 linear
+}
+
+.grabL {
+  animation: grabL .5s 1 linear
+}
+
+.walk {
+  animation: walk .4s infinite linear
+}
+
+.walkR {
+  animation: walk .4s infinite linear reverse
+}
+
+.flatten {
+  animation: flatten .15s 1 linear
+}
+
+@keyframes blink {
+  0%,
+  4% {
+    transform: scale(1)
+  }
+  2% {
+    transform: scale(2, .2)
+  }
+}
+
+@keyframes Rexpress {
+  0%,
+  80% {
+    transform: rotate(10deg)
+  }
+  2%,
+  40%,
+  84% {
+    transform: rotate(30deg)
+  }
+  41% {
+    transform: rotate(-10deg)
+  }
+  42% {
+    transform: rotate(-20deg)
+  }
+  44%,
+  79% {
+    transform: rotate(-30deg)
+  }
+  82% {
+    transform: rotate(20deg)
+  }
+}
+
+@keyframes flatten {
+  0% {
+    transform: scale(2, .7) translate(0, 30px)
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(2.7, .1)
+  }
+  25% {
+    transform: scale(1, 2)
+  }
+  90% {
+    transform: scale(1, 1.2)
+  }
+}
+
+@keyframes grab {
+  0% {
+    transform: skew(15deg, 0deg)
+  }
+}
+
+@keyframes grabL {
+  0% {
+    transform: skew(-15deg, 0deg)
+  }
+}
+
+@keyframes walk {
+  20% {
+    transform: rotate(-5deg)
+  }
+  50% {
+    transform: translate(0, -7px)
+  }
+  80% {
+    transform: rotate(5deg)
+  }
+}
+
+@keyframes success {
+  5% {
+    transform: translate(0, -7px) rotateY(100deg)
+  }
+  30% {
+    transform: translate(0, -24px) rotateY(-100deg)
+  }
+  55% {
+    transform: translate(0, -67px) rotateY(100deg)
+  }
+  60% {
+    transform: rotateY(-100deg) scale(1.1, .9)
+  }
+  70% {
+    transform: rotate(5deg)
+  }
+}
+
+.ani {
+  animation: shimmy 1s ease-in-out
+}
+
+.tut {
+  animation: shimmy 4s ease-in-out
+}
+
+@keyframes shimmy {
+  3% {
+    transform: scale(1, 1)
+  }
+  95% {
+    transform: translate(0, 0)
+  }
+  100% {
+    transform: translate(0, 20px) scale(.05, .05) rotate(150deg)
+  }
+}

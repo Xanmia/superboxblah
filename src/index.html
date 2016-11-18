@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>    
+    <meta name="viewport" content="width=device-width, initial-scale=.6">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes">
+    <!-- build:css -->
+    <link href="style/main.css" rel="stylesheet" />
+    <!-- endbuild -->
+</head>
+
+<body>
+    <script>var $ = {};</script>
+        <div id="bob">
+            <div class="head">
+                <div id="eyeLeft" class='eye'></div>
+                <div id="eyeRight" class='eye'></div>
+                <div id='browLeft' class='brow'></div>
+                <div id='browRight' class='brow'></div>
+            </div>
+            <div id="bobody">
+            <div class="body">
+                <svg version="1.1" width=95 height=115 viewBox="-20 -70 85 130" xmlns="http://www.w3.org/2000/svg">
+                <path  fill="#808080" stroke="#000000" stroke-width="1" d="M33,1.167v7.499C34.667,45.5,1.667,43.5,1.667,43.5l0.323-7.508C27,38.333,24,14.166,24,14.166H1.667L2,1.167H33z"/>
+                </svg>
+            </div>
+            </div>
+       
+
+        </div>
+     <canvas id="back"></canvas>
+        <canvas id="main"></canvas>
+<div id="board"></div>
+
+    <!-- build:js -->
+    <script src="js/utils.js"></script>
+    <script src="js/sprite.js"></script>
+    <script src="js/emitter.js"></script>
+    <script src="js/entities/enem.js"></script>
+    <script src="js/entities/weapons.js"></script>
+    
+    <script src="js/entities/enemy.js"></script>
+    <script src="js/entities/spawner.js"></script>
+    <script src="js/entities/projectile.js"></script>
+    <script src="js/entities/crate.js"></script>
+    <script src="js/entities/surface.js"></script>
+    <script src="js/entities/player.js"></script>
+    <script src="js/states/play.js"></script>
+    <script src="js/game.js"></script>
+    <!-- endbuild -->
+</body>
+
+</html>
