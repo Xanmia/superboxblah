@@ -12,7 +12,26 @@ $.mute = 0;
 
 $.state;
 
-
+ var sound = {
+     music: new Howl({ src: ['sounds/songtest.m4a'],
+                        autoplay: true,
+                        loop: true,
+                        volume: 0.6}),
+     enemyspawn: new Howl({ src: ['sounds/spawn.mp3'],
+                        volume: 0.0}),
+     enemywalk: new Howl({ src: ['sounds/knock.mp3'],volume: 0.1}),
+     enemyhit: new Howl({ src: ['sounds/explode.mp3'],volume: 0.4}),//
+     wallBullethit: new Howl({ src: ['sounds/knock.mp3']}),//
+     land: new Howl({ src: ['sounds/knock.mp3']}),
+     jump: new Howl({ src: ['sounds/knock.mp3']}),//
+     walk: new Howl({ src: ['sounds/knock.mp3'],volume: 0.3}),
+     shoot: new Howl({ src: ['sounds/shot.mp3'],volume: 1.5}),//
+     powerup: new Howl({ src: ['sounds/powerup.mp3'],volume: 0.5}),//
+     laser: new Howl({ src: ['sounds/laser2.mp3'],volume: 0.1}),//
+     fail : new Howl({ src: ['sounds/fail.mp3'],volume: 0.7})
+ }
+ Howler.mute(true);
+ 
 $.W = Math.min(window.innerWidth,800);
 $.H = Math.min(window.innerHeight,600);
 
@@ -35,6 +54,8 @@ $.setup = function () {
     window.addEventListener('keydown', $.keydown, false);
     window.addEventListener('keyup', $.keyup, false);
     $.updateDelta();
+
+
    // $.state = new $.play();
 
 	$.loadImages();
@@ -65,6 +86,7 @@ $.loadImages = function () {
         if (count >= total) {
        		$.state = new $.play();
 			$.loop();
+         //   sound.music.play();
         }
     };
 
@@ -105,11 +127,11 @@ $.update = function () {
 }
 
 $.render = function () {
-    $.mainctx.save();
+    //$.mainctx.save();
     //$.mainctx.scale(.375,.25);
     $.mainctx.clearRect(0, 0, $.W, $.H);
     $.state.render();
-    $.mainctx.restore();
+    //$.mainctx.restore();
 
 }
 

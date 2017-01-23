@@ -13,19 +13,9 @@ $.surface = function(opt){
 
     this.render = function(){
 
-   
-       // $.mainctx.save();
-       // $.mainctx.translate(this.x,this.y);
-        //     var pattern = $.mainctx.createPattern($.images['floor'], 'repeat');
-
-
-  
-      //var pattern = $.mainctx.createPattern(tempCanvas, 'repeat');
-        //$.mainctx.fillStyle = pattern;
-
         if(this.h>45){
         $.mainctx.fillStyle = "rgb(0,0,0)";
-                $.mainctx.fillRect(this.x, this.y, 5, this.h);
+                $.mainctx.fillRect(this.x, this.y, 45, this.h);
         }
         else{
         for(i=0; i<(this.w/45); i++)
@@ -34,9 +24,6 @@ $.surface = function(opt){
         }
         }
 
-       // $.mainctx.scale(3,3);
-      //  $.mainctx.drawImage($.images['floor'],0,0);
-      //  $.mainctx.restore();
     }
 }
 

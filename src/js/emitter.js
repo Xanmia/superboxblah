@@ -87,9 +87,17 @@ var emitter = (function () {
                 $.mainctx.globalAlpha = objs[i].l / 20;
                 $.mainctx.fillStyle = settings.color;//'rgb(255,0,0)';
                 $.mainctx.fillRect(objs[i].x, objs[i].y, objs[i].w, objs[i].h);
+               // $.mainctx.stroke();
+               // $.mainctx.lineWidth = 1;
+               // $.mainctx.strokeStyle = 'white';
+               // $.mainctx.stroke();
+
                 $.mainctx.restore();
+                
                 objs[i].l -= 1;
-                if (objs[i].l <= 0) { objs.splice(i, 1); }
+                if (objs[i].l <= 0) { 
+                    objs.splice(i, 1); 
+                }
             }
             duration--;
             //new particle object 

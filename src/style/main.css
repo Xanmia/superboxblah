@@ -45,7 +45,7 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAACMCAMA
   height: 60px;
   z-index: 1;
   position: absolute;
-
+  transform: scale(.75,.75);
   transform-origin: 50% 99%;
 }
 
@@ -260,4 +260,260 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAACMCAMA
   100% {
     transform: translate(0, 20px) scale(.05, .05) rotate(150deg)
   }
+}
+
+
+.enemy {
+  width: 30px;
+  height: 60px;
+  color: white;
+  z-index: 20;
+  left: -50%;
+  position: absolute;
+  top: 50%;
+  transform-origin: 50% 99%;
+}
+
+.enemy .head {
+  position: absolute;
+  background: gray;
+  width: 30px;
+  height: 15px;
+  transform: rotate(8deg);
+
+    border-width: 1px 1px 2px 1px;
+  border-radius: 35% 35% 0% 0%;
+   transform-origin: 100% 100%;
+}
+
+
+.enemy .eye {
+  position: absolute;
+  top: 3px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: black;
+  animation: blink 4s infinite;
+}
+
+.enemy .foot{
+  position: absolute;
+  top: 30px;
+  width: 25px;
+  height: 13px;
+  border-radius: 50%;
+  background-color: red;
+   border-color: black;
+     border-width: 1px 2px 3px 1px;
+  border-style: solid;
+}
+
+.enemy .footLeft{
+  left: 3px;
+   transform: rotate(25deg) translate(-17px, 1px);
+  animation: walkleft .8s infinite;
+}
+.enemy .footRight{
+  left: 13px;
+   transform: rotate(-25deg) translate(3px, -2px);
+    animation: walkRight .8s infinite;
+}
+
+
+.enemy .eyeLeft {
+  left: 1px;
+}
+
+.enemy .eyeRight {
+  left: 12px;
+}
+
+
+.enemy .jaw {
+  position: absolute;
+  background: gray;
+  width: 30px;
+  height: 10px;
+  transform: rotate(-8deg);
+  top: 13px;
+  left:0px;
+  border-color: black;
+  border-style: solid;
+  border-width: 2px 1px 1px 1px;
+  border-radius: 0% 0% 35% 35%;
+  animation:enemybounce .4s ease infinite ;
+  transform-origin: 100% 0%;
+
+}
+
+.enemy .tooth {
+  width:4px;
+  height:2px;
+  background:white;
+  border: solid 1px black;
+}
+
+.enemy .toothleft{
+   position: absolute;
+  top:-5px;
+  left:1px;
+ 
+}
+
+.enemy .toothright{
+   position: absolute;
+  top:-5px;
+  left:8px;
+ 
+}
+
+
+@keyframes walkleft {
+
+  50%{
+      transform: rotate(-25deg) translate(17px, -4px)
+  }
+
+}
+
+@keyframes walkRight {
+
+  50% {
+    transform: rotate(25deg) translate(-27px, 4px) ;
+  }
+
+}
+.enemyBounce {
+      animation:enemybounce .4s  infinite ;
+}
+@keyframes enemybounce {
+    50% {
+    transform: rotate(4deg) translate(0px,5px);
+  }
+}
+
+.eat{
+  animation:eat 10.5s 1;
+}
+
+@keyframes eat {
+    0% {
+    transform: rotate(90deg) scale(3);
+  }
+     3% {
+    transform: rotate(0deg) scale(2.5);
+  }
+       6% {
+    transform: rotate(60deg) scale(2);
+  }
+         9% {
+    transform: rotate(0deg) scale(1.5);
+  }
+    12% {
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+@keyframes enemyDeath {
+    5% {
+    transform: rotate(180deg) ;
+  }
+  20%{
+     transform: rotate(0deg) ;
+  }
+    100% {
+    transform: rotate(0deg) ;
+  }
+}
+
+@keyframes fadeRight {
+  30%{
+    transform: rotate(90deg) translate(-30px,-30px); 
+  }
+  100%{
+    opacity:0;
+    transform: rotate(90deg) translate(-30px,-30px);
+  }
+}
+
+@keyframes fadeLeft {
+  30%{
+    transform: rotateX(185deg) translate(-85px,85px); 
+  }
+  31%{
+    transform: rotateX(185deg) translate(-85px,75px);
+  }
+  100%{
+    opacity:0;
+    transform: rotateX(185deg) translate(-85px,75px);
+  }
+}
+
+
+@keyframes fadeRightBehind {
+  30%{
+    transform: rotateX(185deg) translate(85px,85px); 
+  }
+  31%{
+    transform: rotateX(185deg) translate(85px,75px);
+  }
+  100%{
+    opacity:0;
+    transform: rotateX(185deg) translate(85px,75px);
+  }
+}
+
+@keyframes fadeLeftBehind {
+  30%{
+    transform: rotate(-185deg) translate(85px,85px); 
+  }
+  31%{
+    transform: rotate(-185deg) translate(85px,80px);
+  }
+  100%{
+    opacity:0;
+    transform: rotate(-185deg) translate(85px,80px);
+  }
+}
+
+@keyframes fling{
+  5%{
+    transform:  translate(-55px,30px);
+  }
+  15%{
+    transform:  translate(-85px,30px);
+  }
+  100%{
+    transform:  translate(-85px,30px);
+  }
+}
+
+
+@keyframes fadeOut{
+    100%{
+      opacity:0;
+    }
+}
+
+.enemyDeath {
+    animation: enemyDeath 2s 1 ease-out;
+}
+.fadeRight {
+    animation: fadeRight  2s 1 ease-out;
+}
+.fadeLeft {
+    animation: fadeLeft 2s 1;
+}
+
+.fade{
+  animation: fadeOut 2s 1;
+}
+
+.fadeRightBehind{
+  animation: fling 2s 1 ease-out;
+}
+
+.fadeLeftBehind{
+    animation: fling 2s 1 ease-out;
 }

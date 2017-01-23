@@ -45,7 +45,7 @@ $.util.pickRandomFromObject = function (obj) {
 
 $.board = {//jumper tutorial
             p: { x: 600, y: 1100 },
-            b: [{ x: 0, y: 560, w: 360, h: 40 }, { x: 440, y: 560 , w: 360, h: 40},{ x: 0, y: 520, w: 180, h: 40 },{ x: 620, y: 520, w: 180, h: 40 },{ x: 275, y: 425, w: 270, h: 40 }, { x: 510, y: 290, w: 270, h: 40 }, { x: 40, y: 290, w: 270, h: 40 }, { x: 275, y: 150, w: 270, h: 40 }, { x: 0, y: 0, w: 45, h: 700 }, { x: 760, y: 0, w: 45, h: 700 },{ x: 0, y: 0, w: 360, h: 40 }, { x: 450, y: 0 , w: 360, h: 40}]
+            b: [{ x: 0, y: 560, w: 360, h: 40 }, { x: 440, y: 560 , w: 360, h: 40},{ x: 0, y: 520, w: 180, h: 40 },{ x: 620, y: 520, w: 180, h: 40 },{ x: 265, y: 425, w: 270, h: 40 }, { x: 495, y: 290, w: 270, h: 40 }, { x: 40, y: 290, w: 270, h: 40 }, { x: 265, y: 150, w: 270, h: 40 }, { x: 0, y: 0, w: 360, h: 40 }, { x: 450, y: 0 , w: 360, h: 40},{ x: 0, y: 0, w: 45, h: 700 }, { x: 760, y: 0, w: 45, h: 700 }]
       };
 
 
@@ -129,6 +129,32 @@ $.smokeEmit = {
         }
 };
 
+$.breakboxEmit = {
+  settings : {
+            minX: -25,
+            maxX: 25,
+            minY: -1,
+            maxY: 1,
+            minW: 5,
+            maxW: 15,
+            minH: 5,
+            maxH: 15,
+            minL: 20,
+            maxL: 20,
+            color: 'rgb(85,75,63)'
+        },
+        changes : {
+            minX: 0,
+            maxX: 0,
+            minY: 0,
+            maxY: 2,
+            minW: 0,
+            maxW: 0,
+            minH: 0,
+            maxH: 0
+        }
+};
+
 $.explosionEmit = {
   settings : {
             minX: -1,
@@ -166,6 +192,8 @@ $.data = {
         uzi: 'iVBORw0KGgoAAAANSUhEUgAAABMAAAAUCAMAAABYi/ZGAAAALVBMVEUAAAAAAAAdGiEiIiIxMTE+MzI/LDNENjpEOjtHR0dJNDFPT09WVlZbQT1fX1+Z16m6AAAAAXRSTlMAQObYZgAAAF9JREFUeNqlztsOABEMRdGag3H//8+daiUl82g9IDukaAJtAFn9XhIkeYjWGlLixueh5s4tS3sUppSrvM27qq2edMZJ/zKRc1ho4Uah9wAyYNbMTSObacYbf62UeHvvA1RLBIUZXzqVAAAAAElFTkSuQmCC',
         shotgun:'iVBORw0KGgoAAAANSUhEUgAAAB4AAAAPCAMAAADEZI+uAAAAKlBMVEUAAAAAAAAaGhoiIiIsLCwxMTE5OTk+MzJLLy1NTU1SOzdTNzRbQT1fX18gddJqAAAAAXRSTlMAQObYZgAAAGJJREFUeNqF0dEOgCAIQFECDVH8/98taE1bkXfj6TBegFUUdOneP2MmcpbPcraF6Hi2mM17r7WUMd0yVmcR1dbGiMWsztaTAQFxZpiPw8kb0M3vMKUUsTtizN6SLfp/BSw6ABJSB0tuNyjoAAAAAElFTkSuQmCC',
         shotgunDouble:'iVBORw0KGgoAAAANSUhEUgAAAB0AAAANCAYAAABVRWWUAAAAc0lEQVR42mNQUlL6T0vMgA3Ex8f/pwW2MzYCY6yW+/r6/qcFNjQ0BGOsltMiSGEWImNky2kWvOiWRjvaIiylVfDCfAayDMNSS0vL/7TAeC2lIviPTIMMp5elcAPpbSkY08tShoGylAE9eNExTS3FVfCAxAEX9Jvr23/i7QAAAABJRU5ErkJggg==',
-        blob: 'iVBORw0KGgoAAAANSUhEUgAAAKAAAAAgCAMAAACioYPHAAAAElBMVEUAAAA3NUpFQWJUT3dgV4zrAAADDbxiAAAAAXRSTlMAQObYZgAAAL9JREFUeAHt0sEKAjEMRVGbTP//l+3gJQuJwVAXD+xbzj0zLeLj7Exp4zXJTmSi3RhCpLPICMl+MYRKB9B97bKbKHXAnKvPGUKkJ8AvgEqPn9gZQKefC+51RA5Euv4Fz5/wzy6o1RMBUOoBEACRDnAyQKgj3IwBxLr5YMMAze6b7yc9AQhAq3tk+u++D+Ah4MvOVgfsfz/vFs/GLd5B0QFuIzK2fr97PgCSgc8ZQSXX73fOT57UgJyLsrL2+bJ7AvJdFAEHWHH1AAAAAElFTkSuQmCC'
-    }
+        blob: 'iVBORw0KGgoAAAANSUhEUgAAAKAAAAAgCAMAAACioYPHAAAAElBMVEUAAAA3NUpFQWJUT3dgV4zrAAADDbxiAAAAAXRSTlMAQObYZgAAAL9JREFUeAHt0sEKAjEMRVGbTP//l+3gJQuJwVAXD+xbzj0zLeLj7Exp4zXJTmSi3RhCpLPICMl+MYRKB9B97bKbKHXAnKvPGUKkJ8AvgEqPn9gZQKefC+51RA5Euv4Fz5/wzy6o1RMBUOoBEACRDnAyQKgj3IwBxLr5YMMAze6b7yc9AQhAq3tk+u++D+Ah4MvOVgfsfz/vFs/GLd5B0QFuIzK2fr97PgCSgc8ZQSXX73fOT57UgJyLsrL2+bJ7AvJdFAEHWHH1AAAAAElFTkSuQmCC',
+        star:'iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAMAAACeyVWkAAAAGFBMVEUAAAAAAAA5OTk9PT1HR0dVVVVsbGyNjY3w6xM0AAAAAXRSTlMAQObYZgAAAGtJREFUeAFlz0ECBSEIAlCwabz/jT9+Z0HJJnqsBEAFX3Kv/pBrDRbuPViYeTOE3eha6NxNaGxzMyPIC8l4nuCJEL6v2JGFgNhxap9XPDBTLOSB9UYwm7LRZ+FGV2PhanUWErxZSAz+4+DCH6I0Au3OjnwKAAAAAElFTkSuQmCC',
+        laser:'iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAIUlEQVR42mPo3+n8Hx0zvPov8x8dM7z77/kfHWNXic1MAK+DR5ZbxG2uAAAAAElFTkSuQmCC'
+ }
 }

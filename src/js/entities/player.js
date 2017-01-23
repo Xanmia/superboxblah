@@ -1,8 +1,8 @@
 $.player = function () {
     this.x = 200;
     this.y = 200;
-    this.w = 30;
-    this.h = 30;
+    this.w = 25;
+    this.h = 40;
     this.velocityX = 0;
     this.velocityY = 0;
     this.lastVX = 0;
@@ -14,13 +14,17 @@ $.player = function () {
     var currjump = 0;
     var doJump = true;
     var canJump = 0;
-    var status = true;
+    this.status = true;
 
     var tts = 0;
-    var shootTick = 9;
+    var shootTick = 8;
+
+    var ttws = 20;
+    var walkTick = 20;
+    
     this.projectiles = [];
 
-    var direction = 1;
+    this.direction = 1;
 
     this.weapon = $.weapons[2];
 
@@ -34,6 +38,10 @@ $.player = function () {
     this.jump = function () {
         this.velocityY = maxJumpHeight;
         this.addAnim('bounce');
+        sound.jump.play();
+    //    var id2 = sound.play();
+  
+  //      sound.rate((Math.random()*3)+1, id2);
         //$.main.style.transform = ""
     }
 
@@ -49,14 +57,25 @@ $.player = function () {
             this.velocityX += lateralMovement;
        //     playerSprite.setState('walk');
         }
+      
     }
 
     this.shoot = function () {
-        tts += 1;//add * $.dt?
-        if (tts > shootTick) {
-            this.projectiles.push(new $.projectile({ x: this.x, y: this.y + 5 }, direction));
+       // tts += 1;//add * $.dt?
+        if (tts > this.weapon.firerate) {
+            var i = this.weapon.projectiles!=undefined?this.weapon.projectiles.length:0;
+            if(i<=0){
+                this.projectiles.push(new $.projectile({ x: this.x-((this.weapon.x-25)*this.direction), y: this.y + this.weapon.y +3 }, this.direction, this.weapon.range, this.weapon.destroyable));
+            }
+            while(i--){
+                this.projectiles.push(new $.projectile({ x: this.x-((this.weapon.x-25)*this.direction), y: this.y + this.weapon.y +3}, this.direction, this.weapon.range, this.weapon.destroyable, this.weapon.projectiles[i]));
+            }
+  
             tts = 0;
-            this.velocityX += direction * -1;
+            this.velocityX += this.weapon.recoil * (this.direction*-1);
+             var id2 = sound[this.weapon.sound].play();
+             
+             sound.shoot.rate((Math.random()*.1)+1, id2);
         }
     }
 
@@ -66,17 +85,27 @@ $.player = function () {
         var i = objs.length; while (i--) {
             if ($.util.rectInRect(meNext, objs[i])) {
                 _objs.push({ hit: true, e: objs[i] });
+              // sound.land.rate((Math.random()*3)+2, id2);
             }
         }
         return _objs;
     }
 
+    this.playWalkSound = function(){
+        ttws += 1;//add * $.dt?
+        if (ttws > walkTick) {
+            ttws = 0;
+            sound.walk.play();
+           // sound.walk.rate((Math.random()*1)+1, id2);
+        }
+    }
 
     this.addAnim = function (type) {
         if (type && type != "success") {
             if (type.substring(0, 4) == "walk" && this.bodyOBJ.className == type) { return; }
             this.bodyOBJ.className = "";
             void this.bodyOBJ.offsetWidth;
+
             if (type) { this.bodyOBJ.classList.add(type) };
         }
         else {
@@ -89,6 +118,7 @@ $.player = function () {
 
 
     this.update = function (objs) {
+        tts += 1;
         $.main.style.transform = "translate(" + this.velocityX * 4 + "px," + this.velocityY / 2 * -1 + "px ) skewX(" + this.velocityX.toFixed(1) / 10 * -1 + "deg) rotate(" + this.velocityX.toFixed(1) / 10 + "deg)";
 
         // $.main.style.transform = "skewX(" + this.velocityX.toFixed(1)/4*-1 + "deg) rotate(" + this.velocityX.toFixed(1)/4 + "deg)";
@@ -97,9 +127,11 @@ $.player = function () {
 
         for (i = 0; i < this.projectiles.length; i++) {
             this.projectiles[i].update();
-            if (!this.containBounds(this.projectiles[i])) {
+            if (!this.containBounds(this.projectiles[i]) ) {
                 emitter.start(4, this.projectiles[i].x, this.projectiles[i].y, 1, $.smokeEmit.settings, $.smokeEmit.changes);
-
+                sound.wallBullethit.play();
+                this.projectiles.splice(i, 1);
+            }else if(!this.projectiles[i].status){
                 this.projectiles.splice(i, 1);
             }
         }
@@ -111,16 +143,17 @@ $.player = function () {
         if (doJump) {
             this.jump();
             canJump = 0;
+
             //   emitter.start(3,400,300,100);
         }
 
         if ($.key.left) {
             this.moveLeft();
-            direction = -1;
+            this.direction = -1;
         }
         else if ($.key.right) {
             this.moveRight();
-            direction = 1;
+            this.direction = 1;
         }
         if ($.key.x) {
             this.shoot();
@@ -184,16 +217,19 @@ $.player = function () {
             else if (collide[i].e.x + collide[i].e.w < this.x + this.w) {
                 this.x = collide[i].e.x + collide[i].e.w;
                 this.velocityX = 0;
+                // hit right side
             }
             else if (collide[i].e.x > this.x) {
                 this.x = collide[i].e.x - this.w;
                 this.velocityX = 0;
+                //hit left side
             }
 
 
             if (weight != 0 && collide[i].e.y + collide[i].e.h < this.y) {
                 this.y = collide[i].e.y + collide[i].e.h;
                 this.velocityY = gravity;
+                //hit ceiling
             }
 
         }
@@ -201,7 +237,13 @@ $.player = function () {
     }
 
     this.death = function () {
-        // status = false;
+        sound.music.stop();
+        sound.fail.play();
+        this.status = false;
+        this.htmlOBJ.style.top = -500 + "px";
+                emitter.start(100, this.x + 10, this.y + 10, 1, $.explosionEmit.settings, $.explosionEmit.changes);
+        emitter.start(4, this.x, this.y, 1, $.smokeEmit.settings, $.smokeEmit.changes);
+       // window.body.removeChild(this.htmlOBJ);
     }
 
     this.containBounds = function (e) {
@@ -222,6 +264,7 @@ $.player = function () {
         else if (e.x > $.W - e.w) {
             e.x = $.W - e.w;
             inbounds = false;
+        
         }
         return inbounds;
     }
@@ -232,25 +275,26 @@ $.player = function () {
 
     this.render = function () {
         var eye = 0;
-        if (status) {
+        if (this.status) {
             for (i = 0; i < this.projectiles.length; i++) {
                 this.projectiles[i].render();
             }
-              //  $.mainctx.fillStyle = "rgb(255,0,0)";
-             // $.mainctx.fillRect(this.x, this.y, this.w, this.h);
+         //      $.mainctx.fillStyle = "rgb(255,0,0)";
+           //  $.mainctx.fillRect(this.x, this.y, this.w, this.h);
 
 
             $.mainctx.save();
-            $.mainctx.translate(this.x + 14, this.y);
-            $.mainctx.scale(direction * -2, 2);
+            $.mainctx.translate(this.x+12, this.y);
+            $.mainctx.scale(this.direction * -2, 2);
 
-            if (direction == 1) {
-                $.mainctx.drawImage($.images[this.weapon.image], this.weapon.x, this.weapon.y);
+            $.mainctx.drawImage($.images[this.weapon.image], this.weapon.x, this.weapon.y);
+            if (this.direction == 1) {
+              
                 // $.mainctx.drawImage($.images['uzi'], -18, -2); //-20, -6 -- -28, -2
                 eye = 5;
             }
             else {
-                $.mainctx.drawImage($.images[this.weapon.image], this.weapon.x + 8, this.weapon.y);
+            //    $.mainctx.drawImage($.images[this.weapon.image], this.weapon.x, this.weapon.y);
                 //$.mainctx.drawImage($.images['pistol'], -10, -2); //-12, -6 -- -21,-2
                 eye = -5;
             }
@@ -271,6 +315,7 @@ $.player = function () {
                     else if (this.velocityX > 0) {
                         //do walk right if moving and not in the air
                         this.addAnim('walkR');
+                       
                     }
                 }
 
@@ -281,8 +326,8 @@ $.player = function () {
             this.lastVX = this.velocityX.toFixed(1);
 
 
-            this.htmlOBJ.style.left = this.x + "px";
-            this.htmlOBJ.style.top = this.y - 45 + "px";
+            this.htmlOBJ.style.left = this.x-6 + "px";
+            this.htmlOBJ.style.top = this.y-35 + "px";
             // this.htmlOBJ.style.transform = "scale(.75,.75) translate(" + this.x*1.5 + "px," + (this.y +25) + "px) rotate(" + $.util.range(this.velocityX.toFixed(1) * 4, 51) + "deg) rotateY(" + $.util.range(this.velocityX.toFixed(1) * 12, 80) + "deg)";
 
         }

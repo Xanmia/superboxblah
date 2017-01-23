@@ -4,7 +4,7 @@ $.spawner = function(e,enemyOBJ){
     this.w = 30;
     this.h = 10;
 
-    var tts = 0;
+    var tts = 100;
     var spawnTick = 100;
    // this.velocityX = 7*d;
 
