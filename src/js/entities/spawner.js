@@ -3,7 +3,7 @@ $.spawner = function(e,enemyOBJ){
     this.y = e.y;
     this.w = 30;
     this.h = 10;
-
+    var limit = 20;
     var tts = 100;
     var spawnTick = 100;
    // this.velocityX = 7*d;
@@ -11,7 +11,7 @@ $.spawner = function(e,enemyOBJ){
     this.update = function(){
        // this.x += this.velocityX * $.dt;
         tts += 1;//add * $.dt?
-        if (tts > spawnTick) {
+        if (tts > spawnTick && enemyOBJ.length<=limit) {
             var dir = Math.round(Math.random()*1);
             enemyOBJ.push(new $.enemy(this, dir==0?-1:1));
             tts = 0;
@@ -19,7 +19,7 @@ $.spawner = function(e,enemyOBJ){
     }
 
     this.render = function(){
-        $.mainctx.fillStyle = "rgb(120,32,255)";
-        $.mainctx.fillRect(this.x, this.y, this.w, this.h);
+   //     $.mainctx.fillStyle = "rgb(120,32,255)";
+   //     $.mainctx.fillRect(this.x, this.y, this.w, this.h);
     }
 }

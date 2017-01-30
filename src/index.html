@@ -13,6 +13,35 @@
 
 <body>
     <script>var $ = {};</script>
+<div id='cont'>
+    <div id="prev" class='btn bottom left' onclick="$.state.back();">back</div>
+    <div id="title" class='center'>
+        <div class='title'>Super Blah Box</div>
+        <div class="results">save a semicolon!</div>
+        <div class="choices">
+        <div><div class='optionsText' onclick="$.state.play();">Play</div></div>
+        <!--
+        <div><div class='optionsText'  onclick="$.state.stats();">Stats</div></div>
+        <div><div class='optionsText' onclick="$.state.options();">Options</div></div>-->
+        </div>
+    </div>
+    <div id="options" class='center'>
+        <div class='title'>Super Blah Box</div>
+        <div class="results">save a semicolon!</div>
+        <div class="choices">
+            <div class='optionsText'>Left: <div id="leftKey">left arrow</div></div>
+            <div class='optionsText'>Right: <div id="rightKey">right arrow</div></div>
+            <div class='optionsText'>Shoot: <div id="shootKey">X</div></div>
+            <div class='optionsText'>Jump: <div id="jumpKey">Space Bar</div></div>
+        </div>
+    </div>
+    <div id="stats" class='center'>
+        <div class='title'>Super Blah Box</div>
+        <div class="results">save a semicolon!</div>
+        <div class="choices">
+
+        </div>
+    </div>
         <div id="bob">
             <div class="head">
                 <div id="eyeLeft" class='eye'></div>
@@ -32,21 +61,20 @@
         </div>
 
     <div id="enemy" class="enemy">
-    <div class="foot footLeft"></div>
-    <div class="head enemyBounce">
-    <div class='eye eyeLeft'></div>
-    <div class='eye eyeRight'></div>
-    
-  </div>
- <div class="jaw">   
-    <div class="tooth toothright"></div>
-    <div class="tooth toothleft"></div>
-  </div>
-  <div  class="foot footRight"></div>
-</div>
+        <div class="foot footLeft"></div>
+        <div class="head enemyBounce">
+            <div class='eye eyeLeft'></div>
+            <div class='eye eyeRight'></div>
+        </div>
+    <div class="jaw">   
+        <div class="tooth toothright"></div>
+        <div class="tooth toothleft"></div>
+    </div>
+    <div  class="foot footRight"></div>
+    </div>
      <canvas id="back"></canvas>
-        <canvas id="main"></canvas>
-<div id="board"></div>
+     <canvas id="main"></canvas>
+</div>
 
     <!-- build:js -->
     <script src="js/howler.min.js"></script>
@@ -63,6 +91,10 @@
     <script src="js/entities/surface.js"></script>
     <script src="js/entities/player.js"></script>
     <script src="js/states/play.js"></script>
+    <script src="js/states/endgame.js"></script>
+    <script src="js/states/title.js"></script>
+    <script src="js/states/options.js"></script>
+    <script src="js/states/stats.js"></script>
     <script src="js/game.js"></script>
     <!-- endbuild -->
 </body>

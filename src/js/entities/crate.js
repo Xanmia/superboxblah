@@ -12,7 +12,7 @@ $.crate = function(e, parent){
 
       if ($.util.rectInRect(this, obj)) {
           parent.cratesCaptured++;
-          console.log(parent.cratesCaptured);
+        //  console.log(parent.cratesCaptured);
           var nextLoc = $.util.pickRandomFromObject(this.locs);
           emitter.start(3, this.x+25, this.y, 25,$.breakboxEmit.settings,$.breakboxEmit.changes);
          // emitter.start(100, this.x+10, this.y+10, 1,$.explosionEmit.settings,$.explosionEmit.changes);

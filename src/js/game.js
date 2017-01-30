@@ -12,6 +12,11 @@ $.mute = 0;
 
 $.state;
 
+$.jump = 32;
+$.left = 37;
+$.right = 39;
+$.shoot = 88;
+
  var sound = {
      music: new Howl({ src: ['sounds/songtest.m4a'],
                         autoplay: true,
@@ -30,7 +35,7 @@ $.state;
      laser: new Howl({ src: ['sounds/laser2.mp3'],volume: 0.1}),//
      fail : new Howl({ src: ['sounds/fail.mp3'],volume: 0.7})
  }
- Howler.mute(true);
+// Howler.mute(true);
  
 $.W = Math.min(window.innerWidth,800);
 $.H = Math.min(window.innerHeight,600);
@@ -64,17 +69,17 @@ $.setup = function () {
 
 $.keydown = function (e) {
     if (!$.canEdit) { e.preventDefault() };
-    if (e.keyCode === 37) { $.key.left = 1; };
-    if (e.keyCode === 39) { $.key.right = 1; };
-    if (e.keyCode === 32) { $.key.space = 1; };//32
-    if (e.keyCode === 88) { $.key.x = 1; };
+    if (e.keyCode === $.left) { $.key.left = 1; };
+    if (e.keyCode === $.right) { $.key.right = 1; };
+    if (e.keyCode === $.jump) { $.key.space = 1; };//32 //jump
+    if (e.keyCode === $.shoot) { $.key.x = 1; };//shoot
 }
 
 $.keyup = function (e) {
-    if (e.keyCode === 37) { $.key.left = 0; };
-    if (e.keyCode === 39) { $.key.right = 0; };
-    if (e.keyCode === 32) { $.key.space = 0; };
-    if (e.keyCode === 88) { $.key.x = 0; };
+    if (e.keyCode === $.left) { $.key.left = 0; };
+    if (e.keyCode === $.right) { $.key.right = 0; };
+    if (e.keyCode === $.jump) { $.key.space = 0; };
+    if (e.keyCode === $.shoot) { $.key.x = 0; };
 }
 
 
@@ -84,7 +89,7 @@ $.loadImages = function () {
 
     var check_done = function (count) {
         if (count >= total) {
-       		$.state = new $.play();
+       		$.state = new $.title();
 			$.loop();
          //   sound.music.play();
         }

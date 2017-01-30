@@ -14,8 +14,13 @@ $.surface = function(opt){
     this.render = function(){
 
         if(this.h>45){
-        $.mainctx.fillStyle = "rgb(0,0,0)";
-                $.mainctx.fillRect(this.x, this.y, 45, this.h);
+      //  $.mainctx.fillStyle = "rgb(0,0,0)";
+       //         $.mainctx.fillRect(this.x, this.y, 45, this.h);
+            for(i=0; i<(this.h/45); i++)
+            {
+                 $.backctx.drawImage($.images['sideStruct'], 0 ,0, 15, 15, this.x, this.y+(i*45), 45, 45);
+            }
+           
         }
         else{
         for(i=0; i<(this.w/45); i++)

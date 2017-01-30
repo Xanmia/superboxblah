@@ -1,4 +1,5 @@
 $.enemy = function (e, d) {
+    this.initXY = {x:e.x,y:e.y};
     this.x = e.x;
     this.y = e.y;
     this.w = 25;
@@ -19,7 +20,9 @@ $.enemy = function (e, d) {
     this.htmlOBJ = element.cloneNode(true);
     this.htmlOBJ.id = "dupenemy";
     var htmlHead = this.htmlOBJ.children[1];
-    document.body.appendChild(this.htmlOBJ);
+
+    var cont = document.getElementById("cont");
+    cont.appendChild(this.htmlOBJ);
 
     sound.enemyspawn.rate((Math.random() * 1) + 1, id2);
 
@@ -41,6 +44,14 @@ $.enemy = function (e, d) {
         this.addAnim(htmlHead, ["eat","head"]);
     }
 
+    this.respawn = function(){
+        emitter.start(100, this.x + 10, this.y + 10, 1, $.explosionEmit.settings, $.explosionEmit.changes);
+        emitter.start(4, this.x, this.y, 1, $.smokeEmit.settings, $.smokeEmit.changes);
+        velocityX = 3.5 * d;
+        this.x = this.initXY.x;
+        this.y = this.initXY.y;
+    }
+
     this.checkCollision = function (objs) {
         var meNext = { x: this.x + (velocityX * $.dt), y: this.y - (velocityY * $.dt), w: this.w, h: this.h }
         var _objs = [];
@@ -56,7 +67,7 @@ $.enemy = function (e, d) {
         ttws += 1;//add * $.dt?
         if (ttws > walkTick) {
             ttws = 0;
-            sound.enemywalk.play();
+            //sound.enemywalk.play();
             // sound.walk.rate((Math.random()*1)+1, id2);
         }
     }
@@ -138,13 +149,14 @@ $.enemy = function (e, d) {
         function AnimationEnded(e) {
             if (e.animationName == "enemyDeath" || e.animationName=="fling") {
                 e.currentTarget.removeEventListener("animationend", AnimationEnded, false);
-                document.body.removeChild(e.currentTarget.parentNode);
+                var cont = document.getElementById("cont");
+                cont.removeChild(e.currentTarget.parentNode);
             }
 
         }
        }
        else{
-             document.body.removeChild(this.htmlOBJ);
+             cont.removeChild(this.htmlOBJ);
        }
     }
 
@@ -152,11 +164,18 @@ $.enemy = function (e, d) {
 
         //    $.mainctx.fillStyle = "rgb(0,255,255)";
         //    $.mainctx.fillRect(this.x, this.y, this.w, this.h);
+           /* $.mainctx.save();
+            $.mainctx.translate(this.x, this.y);
+            $.mainctx.fillStyle = "rgb(0,255,255)";
+            $.mainctx.fillRect(this.x, this.y, this.w, this.h);
+            $.mainctx.restore();*/
+
+                this.htmlOBJ.style.transform = "rotateY(" + (velocityX > 0 ? 180 : 0)  + "deg)";
         this.htmlOBJ.style.left = this.x + "px";
         this.htmlOBJ.style.top = this.y - 5 + "px";
         //  this.htmlOBJ.style.transform = "scale(.75,.75) rotate(" + $.util.range(this.velocityX.toFixed(1) * 4, 51) + "deg) rotateY(" + $.util.range(this.velocityX.toFixed(1) * 12, 80) + "deg)";
        // this.htmlOBJ.style.transform = "scaleX(" + (velocityX > 0 ? -1 : 1) + ") ";
-        this.htmlOBJ.style.transform = "rotateY(" + (velocityX > 0 ? 180 : 0)  + "deg)";
+
        
         //      $.mainctx.fillStyle = "rgb(0,0,255)";
         // $.mainctx.font = "20px 'Open Sans', sans-serif";
