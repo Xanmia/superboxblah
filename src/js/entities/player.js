@@ -65,10 +65,10 @@ $.player = function () {
         if (tts > this.weapon.firerate) {
             var i = this.weapon.projectiles != undefined ? this.weapon.projectiles.length : 0;
             if (i <= 0) {//single projectile per shot
-                this.projectiles.push(new $.projectile({ x: this.x - ((this.weapon.x - 25) * this.direction), y: this.y + this.weapon.y + 3 }, this.direction, this.weapon));
+                this.projectiles.push(new $.projectile(this, { x: this.x - ((this.weapon.x - 25) * this.direction), y: this.y + this.weapon.y + 3 }, this.direction, this.weapon));
             }
             while (i--) {//multiple projectiles per shot
-                this.projectiles.push(new $.projectile({ x: this.x - ((this.weapon.x - 25) * this.direction), y: this.y + this.weapon.y + 3 }, this.direction, this.weapon, this.weapon.projectiles[i]));
+                this.projectiles.push(new $.projectile(this, { x: this.x - ((this.weapon.x - 25) * this.direction), y: this.y + this.weapon.y + 3 }, this.direction, this.weapon, this.weapon.projectiles[i]));
             }
 
             tts = 0;
@@ -119,13 +119,16 @@ $.player = function () {
 
     this.update = function (objs) {
         for (i = 0; i < this.projectiles.length; i++) {
-            this.projectiles[i].update();
-            if (!this.containBounds(this.projectiles[i])) {
-                this.projectiles[i].explode();
-                this.projectiles.splice(i, 1);
-            } else if (!this.projectiles[i].status) {
-                this.projectiles.splice(i, 1);
-            }
+            this.projectiles[i].update(objs);
+           
+                if (this.projectiles[i].contain && !this.containBounds(this.projectiles[i])) {
+                    this.projectiles[i].explode();
+                    this.projectiles.splice(i, 1);
+                } else if (!this.projectiles[i].status) {
+                    this.projectiles.splice(i, 1);
+                }
+            
+
         }
 
 
@@ -142,7 +145,7 @@ $.player = function () {
             currjump = $.key.space;
             doJump = (lastJump === 0 & currjump === 1 & canJump === 1) ? true : false;
 
-            if (doJump ) {//&& this.velocityY==0
+            if (doJump) {//&& this.velocityY==0
                 this.jump();
                 canJump = 0;
 
@@ -253,12 +256,12 @@ $.player = function () {
 
     this.containBounds = function (e) {
         var inbounds = true;
-        if (e.y > $.H - e.h) {
+      if (e.y > $.H - e.h) {
             e.y = $.H - e.h;
             inbounds = false;
-          //  this.death();
-        }
-        else if (e.y < 0) {
+            this.death();
+       }
+       else if (e.y < 0) {
             e.y = e.h;
             e.velocityY = 0;
             inbounds = false;
@@ -308,29 +311,29 @@ $.player = function () {
             $.mainctx.restore();
 
 
-       //     if (this.lastVX != this.velocityX.toFixed(1)) {
-                // mostly animating the character here//////
-                if (this.velocityY >= 0 && this.velocityY <= 1) {
-                    if (this.velocityX < 1.5 && this.velocityX > -1.5) {
-                        ///remove walk if not moving and not in the air
-                        if (this.bodyOBJ.className.substring(0, 4) == "walk") { this.bodyOBJ.className = "" };
-                    }
-                    else if (this.velocityX < 0) {
-                        //do walk left if moving and not in the air
-                        this.addAnim('walk');
-                    }
-                    else if (this.velocityX > 0) {
-                        //do walk right if moving and not in the air
-                        this.addAnim('walkR');
+            //     if (this.lastVX != this.velocityX.toFixed(1)) {
+            // mostly animating the character here//////
+            if (this.velocityY >= 0 && this.velocityY <= 1) {
+                if (this.velocityX < 1.5 && this.velocityX > -1.5) {
+                    ///remove walk if not moving and not in the air
+                    if (this.bodyOBJ.className.substring(0, 4) == "walk") { this.bodyOBJ.className = "" };
+                }
+                else if (this.velocityX < 0) {
+                    //do walk left if moving and not in the air
+                    this.addAnim('walk');
+                }
+                else if (this.velocityX > 0) {
+                    //do walk right if moving and not in the air
+                    this.addAnim('walkR');
 
-                    }
-       //         }
+                }
+                //         }
 
                 this.eyelOBJ.style.left = (7 + eye + (this.velocityX.toFixed(2) / 2)) + "px";
                 this.eyerOBJ.style.left = (23 + eye + (this.velocityX.toFixed(2) / 2)) + "px";
                 this.htmlOBJ.style.transform = "scale(.75,.75) rotate(" + $.util.range(this.velocityX.toFixed(1) * 4, 51) + "deg) rotateY(" + $.util.range(this.velocityX.toFixed(1) * 12, 80) + "deg)";
             }
-           // this.lastVX = this.velocityX.toFixed(1);
+            // this.lastVX = this.velocityX.toFixed(1);
 
 
             this.htmlOBJ.style.left = this.x - 6 + "px";

@@ -59,19 +59,21 @@ $.play = function () {
                 }
                 else {
                     var p = player.projectiles.length; while (p--) {
-                        if ($.util.rectInRect(enemies[i], player.projectiles[p])) {
-                            if (enemies[i].status) {
+                        if ($.util.rectInRect(enemies[i], player.projectiles[p]) && !player.projectiles[p].NullProjectileDamage) {
+                            if (enemies[i].status ) {
                                 enemies[i].destroy(player.direction, 1);
+                           //     player.projectiles[p].explode(p);
                                 //    enemies.splice(i, 1); 
                                 if (player.projectiles[p].destroyable) {
-                                    player.projectiles.splice(p, 1);
+                                   player.projectiles[p].explode(p);
+                                  //  player.projectiles.splice(p, 1);
                                 }
                             }
 
                         }
-                        if(this.surfaceContact(player.projectiles[p])){
-                            player.projectiles[p].explode();
-                            player.projectiles.splice(p, 1);
+                        if(this.surfaceContact(player.projectiles[p]) && player.projectiles[p].surfaceDestroyable ){
+                            player.projectiles[p].explode(p);
+                           // player.projectiles.splice(p, 1);
                         }
 
                     }

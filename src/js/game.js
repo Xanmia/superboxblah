@@ -35,7 +35,7 @@ $.shoot = 88;
      laser: new Howl({ src: ['sounds/laser2.mp3'],volume: 0.1}),//
      fail : new Howl({ src: ['sounds/fail.mp3'],volume: 0.7})
  }
-// Howler.mute(true);
+ Howler.mute(true);
  
 $.W = Math.min(window.innerWidth,800);
 $.H = Math.min(window.innerHeight,600);

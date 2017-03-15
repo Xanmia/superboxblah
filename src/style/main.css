@@ -23,6 +23,7 @@ body {
 }
 
 
+
 .center{
   text-align: center;
 }
@@ -36,7 +37,6 @@ body {
 }
 
 canvas{
-  
     position: absolute;
     display: block;
     width:100vw;
@@ -44,7 +44,6 @@ canvas{
     max-width:800px;
     max-height: 600px;
     transition: all .1s;
-  
 }
 
 
@@ -131,6 +130,7 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAACMCAMA
   position: absolute;
   transform: scale(.75,.75);
   transform-origin: 50% 99%;
+  
 }
 
 .head {
@@ -148,6 +148,7 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAACMCAMA
   top: -18px;
   left: -22px;
 
+
 }
 
 .comma {
@@ -161,6 +162,7 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAACMCAMA
   width: 21px;
   height: 15px;
   border-radius: 1px 1px 100% 0px;
+       
 }
 
 .eye {
@@ -356,6 +358,7 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAACMCAMA
   z-index: 2;
   transition: transform 0.3s;
   transform-origin: 50% 99%;
+
 }
 
 .enemy .head {
@@ -391,6 +394,7 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAACMCAMA
    border-color: black;
      border-width: 1px 2px 3px 1px;
   border-style: solid;
+
 }
 
 .enemy .footLeft{
