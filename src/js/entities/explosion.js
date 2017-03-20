@@ -12,7 +12,7 @@ $.explosion = function (e) {
     this.status = true;
     
     this.NullProjectileDamage = false;
-
+    sound.explode.play();
     var velocity = 2.5;//velocity of expolosion increase
     var max = 80; //max size of explosion
     var dissipatePercent = .7; // flip to black percent point

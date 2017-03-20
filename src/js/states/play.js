@@ -13,7 +13,7 @@ $.play = function () {
     for (var i = 0; i < $.board.b.length; i++) {
         surface.push(new $.surface($.board.b[i]));
     }
-
+    sound.music.play();
     this.init = function(){
          for (i = 0; i < enemies.length; i++) {
              if(enemies[i].status){
@@ -25,6 +25,7 @@ $.play = function () {
         //surface = [];
         enemies = [];
         this.cratesCaptured = 0;
+        sound.music.play();
         spawner = new $.spawner({ x: 385, y: 10 }, enemies);
     }
 

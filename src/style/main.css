@@ -628,6 +628,7 @@ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAACMCAMA
 }
 
 #prev {
+  display: none;
   transform: skewX(10deg);
   z-index:4;
 }

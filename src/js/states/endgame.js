@@ -1,8 +1,12 @@
 $.endgame = function(parent)
 {
+    var ttRestart = 0;
+    var restartTime = 100;
 
     this.update = function(){
-            if ($.key.space) {
+        ttRestart += 1;
+            if (ttRestart > restartTime && $.key.space) {
+                ttRestart = 0;
                 parent.init();
             }
     }
@@ -17,6 +21,10 @@ $.endgame = function(parent)
         $.mainctx.font = "60px 'Open Sans', sans-serif";
         $.mainctx.fillText("Game Over", 250, 220);
         $.mainctx.fillText("Crates: " + parent.cratesCaptured, 270, 290);
+        if (ttRestart > restartTime){
+             $.mainctx.font = "30px 'Open Sans', sans-serif";
+            $.mainctx.fillText("Press Space to restart ", 255, 360);
+        }
         $.mainctx.restore();
     }
 }

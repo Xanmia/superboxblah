@@ -19,12 +19,13 @@ $.shoot = 88;
 
  var sound = {
      music: new Howl({ src: ['sounds/songtest.m4a'],
-                        autoplay: true,
+                        autoplay: false,
                         loop: true,
-                        volume: 0.6}),
+                        volume: 0.4}),
      enemyspawn: new Howl({ src: ['sounds/spawn.mp3'],
                         volume: 0.0}),
      enemywalk: new Howl({ src: ['sounds/knock.mp3'],volume: 0.1}),
+     explode: new Howl({ src: ['sounds/explode.mp3'],volume: 0.4}),//
      enemyhit: new Howl({ src: ['sounds/explode.mp3'],volume: 0.4}),//
      wallBullethit: new Howl({ src: ['sounds/knock.mp3']}),//
      land: new Howl({ src: ['sounds/knock.mp3']}),
@@ -35,7 +36,7 @@ $.shoot = 88;
      laser: new Howl({ src: ['sounds/laser2.mp3'],volume: 0.1}),//
      fail : new Howl({ src: ['sounds/fail.mp3'],volume: 0.7})
  }
- Howler.mute(true);
+ Howler.mute();
  
 $.W = Math.min(window.innerWidth,800);
 $.H = Math.min(window.innerHeight,600);
