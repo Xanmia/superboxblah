@@ -22,7 +22,7 @@ $.endgame = function(parent)
         $.mainctx.fillText("Game Over", 250, 220);
         $.mainctx.fillText("Crates: " + parent.cratesCaptured, 270, 290);
         if (ttRestart > restartTime){
-             $.mainctx.font = "30px 'Open Sans', sans-serif";
+            $.mainctx.font = "30px 'Open Sans', sans-serif";
             $.mainctx.fillText("Press Space to restart ", 255, 360);
         }
         $.mainctx.restore();
