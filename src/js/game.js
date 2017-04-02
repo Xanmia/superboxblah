@@ -25,13 +25,16 @@ $.shoot = 88;
      enemyspawn: new Howl({ src: ['sounds/spawn.mp3'],
                         volume: 0.0}),
      enemywalk: new Howl({ src: ['sounds/knock.mp3'],volume: 0.1}),
-     explode: new Howl({ src: ['sounds/explode.mp3'],volume: 0.4}),//
+
      enemyhit: new Howl({ src: ['sounds/explode.mp3'],volume: 0.4}),//
      wallBullethit: new Howl({ src: ['sounds/knock.mp3']}),//
-     land: new Howl({ src: ['sounds/knock.mp3']}),
-     jump: new Howl({ src: ['sounds/knock.mp3']}),//
+     land: new Howl({ src: ['sounds/landing.mp3'],volume: 0.5}),
+     jump: new Howl({ src: ['sounds/knock.mp3'],volume: 0.0}),//
      walk: new Howl({ src: ['sounds/knock.mp3'],volume: 0.3}),
-     shoot: new Howl({ src: ['sounds/shot.mp3'],volume: 1.5}),//
+
+     shoot: new Howl({ src: ['sounds/explode.mp3'],volume: 0.2, rate:3}),//small guns
+
+     explode: new Howl({ src: ['sounds/explode.mp3'],volume: 0.4, rate:2}),//
      powerup: new Howl({ src: ['sounds/powerup.mp3'],volume: 0.5}),//
      laser: new Howl({ src: ['sounds/laser2.mp3'],volume: 0.1}),//
      fail : new Howl({ src: ['sounds/fail.mp3'],volume: 0.7})

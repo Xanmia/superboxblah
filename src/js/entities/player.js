@@ -73,9 +73,10 @@ $.player = function () {
 
             tts = 0;
             this.velocityX += this.weapon.recoil * (this.direction * -1);
-            var id2 = sound[this.weapon.sound].play();
+            //var id2 = 
+            sound[this.weapon.sound].play();
 
-            sound.shoot.rate((Math.random() * .1) + 1, id2);
+           // sound.shoot.rate((Math.random() * .1) + 1, id2);
         }
     }
 
@@ -212,11 +213,15 @@ $.player = function () {
 
         var i = collide.length; while (i--) {
             if (collide[i].e.y > this.y) {
+                    if(canJump==0){
+                        sound.land.play();
+                   }
                 if (this.velocityY <= 0) {
                     // this.y += this.velocityY;
                     this.velocityY = 0;
                     weight = 0;
                     this.y = collide[i].e.y - this.h;
+               
                     canJump = 1;
                 }
 
